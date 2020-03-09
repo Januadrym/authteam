@@ -9,31 +9,6 @@ import (
 	"github.com/gorilla/mux"
 )
 
-type (
-	Router struct {
-		m map[string]http.Handler
-	}
-)
-
-func NewRouter() *Router {
-	return &Router{
-		m: make(map[string]http.Handler),
-	}
-}
-
-func (router *Router) Handle(path string, method string, handler http.Handler) {
-	router.m[path+method] = handler
-}
-
-func (router *Router) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	handler, ok := router.m[r.URL.Path+r.Method]
-	if ok {
-		handler.ServeHTTP(w, r)
-		return
-	}
-	http.Error(w, "not found", http.StatusNotFound)
-}
-
 func main() {
 	router := mux.NewRouter()
 	router.Use(LogMiddleware)
