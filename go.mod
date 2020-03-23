@@ -1,4 +1,4 @@
-module authteam
+module authtaem
 
 go 1.13
 

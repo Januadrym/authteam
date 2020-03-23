@@ -95,7 +95,6 @@ func isAuthenticated(endpoint func(http.ResponseWriter, *http.Request)) http.Han
 			if token.Valid {
 				endpoint(w, r)
 			}
-
 		} else {
 			fmt.Fprintf(w, "Not login yet")
 		}
